@@ -1,0 +1,5 @@
+[8.9(월)]
+# UsersApp 제작
+# SuperUser 생성
+    - HAHA, 123123
+# setting > secret)key:  '*q1@pe(5i4m=!uqd4a$1h^%c3toa-^e04_^8l0qw-hfv^-2lvl'

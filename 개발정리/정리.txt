@@ -1,0 +1,44 @@
+[초기설정]
+(1) pipenv shell
+(2) pipenv install 
+(3) django-admin startproject config 
+    - 바깥 config 이름 변경(아무거나)
+    - 안쪽 config, manage경로를 최상위로 변경
+    - 바깥 config(이름바뀐) 빈폴더 삭제
+
+
+
+[참고자료]
+* https://docs.djangoproject.com/en/2.2/ref/settings  로 가면 필요한 정보 얻을 수 있음.
+
+
+
+
+[자주쓰는 terminal정리]
+#마이그레이트
+: python manage.py makemigrations // 장고가 나의 Model을 확인 후, migration 파일 생성
+: python manage.py migrate
+================================================
+
+#서버실행
+: python manage.py runserver
+- http://127.0.0.1:8000          //일반서버주소
+- http://127.0.0.1:8000/admin    //관리자 주소
+================================================
+
+#관리자 설정
+: python manage.py createsuperuser
+    username            //kgyury, kkr
+    email address       //mandarining0918@gmail.com
+    passward            //boo777
+================================================
+
+#App 생성 // config폴더 밖에서 다음의 코드 수행
+: django-admin startapp [앱이름s] //이름은 항상 복수형이여야 함
+================================================
+
+#seed 실행하기
+: python manage.py [파일명] --number [원하는 숫자]  // ex) python manage.py seedromms --number 1
+
+
+
