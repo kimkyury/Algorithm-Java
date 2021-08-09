@@ -331,5 +331,5 @@ Thumbs.db #thumbnail cache on Windows
 node_modules/
 uploads/
 
-정리.txt
+개발정리/
 # End of https://www.toptal.com/developers/gitignore/api/python,code,virtualenv
