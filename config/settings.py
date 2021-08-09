@@ -31,18 +31,24 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DJANGO_APPS = [
-
-]
-
-THIRD_PARTY_APPS = []
-
-PROJECT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+]
+
+THIRD_PARTY_APPS = ["django_countries",]
+
+PROJECT_APPS = [
+    "core.apps.CoreConfig",
+    "users.apps.UsersConfig",
+    "gyms.apps.GymsConfig",
+    "reviews.apps.ReviewsConfig",
+    "communities.apps.CommunitiesConfig",
+    "informations.apps.InformationsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -126,3 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+AUTH_USER_MODEL = "users.User"
