@@ -1,5 +1,6 @@
-[8.9(월)]
-# UsersApp 제작
-# SuperUser 생성
-    - HAHA, 123123
-# setting > secret)key:  '(kx3(ls4c_m6de$%x7911g5$8m(ae$5*)3sc20&50mi!f)y$$v'
+[9.5(일)]
+# app 생성
+# pipenv install pillow // 이미지처리 패키지
+# pipenv install django-dotenv // .env파일 사용하기
+
+# config 설정
