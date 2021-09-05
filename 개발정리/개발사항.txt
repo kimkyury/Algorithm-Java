@@ -1,6 +1,19 @@
 [9.5(일)]
-# app 생성
-# pipenv install pillow // 이미지처리 패키지
-# pipenv install django-dotenv // .env파일 사용하기
+# config/core/users app 생성
+
+# 패키지 설치
+    - pipenv install pillow // 이미지처리 패키지
+    - pipenv install django-dotenv // .env파일 사용하기
 
 # config 설정
+    - settings : core, users 설정
+
+# core App
+    - models에 함수작성 
+        => core 기본설정 끝
+
+# users App
+    - model 작성
+    - admin 설정
+
+https://h0ng3.tistory.com/28
