@@ -327,9 +327,8 @@ Thumbs.db #thumbnail cache on Windows
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 
-
+.vscode
 node_modules/
 uploads/
-
 개발정리/
 # End of https://www.toptal.com/developers/gitignore/api/python,code,virtualenv
