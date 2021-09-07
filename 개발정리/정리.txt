@@ -6,12 +6,8 @@
     - 안쪽 config, manage경로를 최상위로 변경
     - 바깥 config(이름바뀐) 빈폴더 삭제
 
-
-
 [참고자료]
 * https://docs.djangoproject.com/en/2.2/ref/settings  로 가면 필요한 정보 얻을 수 있음.
-
-
 
 
 [자주쓰는 terminal정리]

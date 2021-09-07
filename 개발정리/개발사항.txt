@@ -16,4 +16,4 @@
     - model 작성
     - admin 설정
 
-https://h0ng3.tistory.com/28
+https://h0ng3.tistory.com/28 // 다중 유저 못 만드는 구나..
