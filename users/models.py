@@ -55,9 +55,6 @@ class Client(AbstractUser, core_models.CheckOut_TimeStampedModel):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return self.name
-
     """고객 정보"""
 
     # 이용중인 헬스장 선택
