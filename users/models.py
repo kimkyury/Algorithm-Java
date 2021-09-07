@@ -70,4 +70,8 @@ class Client(AbstractUser, core_models.CheckOut_TimeStampedModel):
     class Meta:
         verbose_name_plural = "고객"
 
+    def save(self, *args, **kwargs):
+        self.city = str.capitalize(self.city)
+        super().save(*args, **kwargs)
+
     # 결제정보 (api 가져와야하나)
