@@ -5,7 +5,19 @@ from . import models
 
 @admin.register(models.Client)
 class ClientAdmin(admin.ModelAdmin):
-    fieldsets = UserAdmin.fieldsets + (
+    fieldsets = (
+        (
+            "기본 정보",
+            {
+                "fields": (
+                    "username",
+                    "password",
+                    "first_name",
+                    "last_name",
+                    "email",
+                )
+            },
+        ),
         (
             "부가 정보",
             {

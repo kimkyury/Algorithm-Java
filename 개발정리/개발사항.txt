@@ -17,3 +17,10 @@
     - admin 설정
 
 https://h0ng3.tistory.com/28 // 다중 유저 못 만드는 구나..
+
+
+[9/7(화)]
+# users-model/admin
+    -client 전용으로 제작
+    -관리자 계정 생성 ( kim/12341234)
+
