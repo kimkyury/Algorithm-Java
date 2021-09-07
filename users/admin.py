@@ -24,8 +24,8 @@ class ClientAdmin(admin.ModelAdmin):
             "현황",
             {
                 "fields": (
-                    "resent_checkIn_time",
-                    "resent_checkOut_time",
+                    "check_in",
+                    "check_out",
                     "Total_hoursOfExercise",
                     "Total_hoursOfVisits",
                     "Expiration_date",
@@ -34,33 +34,6 @@ class ClientAdmin(admin.ModelAdmin):
         ),
     )
 
-    list_filter = UserAdmin.list_filter
-    list_display = (
-        "username",
-        "first_name",
-        "last_name",
-        "email",
-    )
-
-
-@admin.register(models.Owner)
-class ClientAdmin(admin.ModelAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        (
-            "부가 정보",
-            {
-                "fields": (
-                    "phone_number",
-                    "avatar",
-                    "gender",
-                    "bio",
-                    "birthdate",
-                    "province",
-                    "city",
-                )
-            },
-        ),
-    )
     list_filter = UserAdmin.list_filter
     list_display = (
         "username",
