@@ -2,6 +2,7 @@
 (1) pipenv shell
 (2) pipenv install 
 (3) django-admin startproject config 
+    * django-admin startapp [app이름]
     - 바깥 config 이름 변경(아무거나)
     - 안쪽 config, manage경로를 최상위로 변경
     - 바깥 config(이름바뀐) 빈폴더 삭제
