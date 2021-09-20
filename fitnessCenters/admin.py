@@ -64,19 +64,13 @@ class fitnessAdmin(admin.ModelAdmin):
         "city",
         "price",
         "guests",
-        "check_in",
-        "check_out",
     )
 
-    list_filter = (
-        "facilities",
-        "fitnessEquipments",
-    )
+    list_filter = ("facilities",)
 
-    search_fields = "=city"
+    # search_fields = "=city"
 
     filter_horizontal = (
-        "fitnessEquipments",
         "facilities",
         "options",
     )

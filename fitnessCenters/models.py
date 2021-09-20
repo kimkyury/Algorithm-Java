@@ -1,6 +1,7 @@
 from django.db import models
 from users import models as user_models
 from core import models as core_models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -45,7 +46,9 @@ class Photo(core_models.TimeStampedModel):
 
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="fitness_photos")
-    fitness = models.ForeignKey("헬스장", related_name="photos", on_delete=models.CASCADE)
+    fitness = models.ForeignKey(
+        "Fitness", related_name="photos", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.caption
@@ -90,10 +93,10 @@ class Fitness(core_models.TimeStampedModel):
     close_time = models.TimeField("마감시간")
 
     fitnessequipments = models.ManyToManyField(
-        "헬스기구", related_name="fitness", blank=True
+        "Fitnessequipment", related_name="fitness", blank=True
     )
-    facilities = models.ManyToManyField("시설", related_name="fitness", blank=True)
-    options = models.ManyToManyField("옵션", related_name="fitness", blank=True)
+    facilities = models.ManyToManyField("Facility", related_name="fitness", blank=True)
+    options = models.ManyToManyField("Option", related_name="fitness", blank=True)
 
     def __str__(self):
         return self.name
@@ -101,6 +104,13 @@ class Fitness(core_models.TimeStampedModel):
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
+
+    def first_photo(self):
+        (photo,) = self.photos.all()[:1]  # ','해주면 실제로 원하는 게 첫 값이라는 걸 python이 앎
+        return photo.file.url
+
+    def get_absolute_url(self):
+        return reverse("fitness:detail", kwargs={"pk": self.pk})
 
     """ def total_rating(self):  # 총 평균을 표시하자
         all_reviews = self.reviews.all()
