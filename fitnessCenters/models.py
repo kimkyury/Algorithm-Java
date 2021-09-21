@@ -50,6 +50,9 @@ class Photo(core_models.TimeStampedModel):
         "Fitness", related_name="photos", on_delete=models.CASCADE
     )
 
+    class Meta:
+        verbose_name_plural = "헬스장 사진"
+
     def __str__(self):
         return self.caption
 
@@ -79,6 +82,7 @@ class Fitness(core_models.TimeStampedModel):
         (PROVINCE_JJD, "제주도"),
     )
 
+    # 헬스장 기본정보 (상업명/설명/지역(도/시)/가격)
     name = models.CharField("헬스장 이름", max_length=140)
     description = models.TextField("소개", blank=True, null=True)
 
@@ -86,8 +90,9 @@ class Fitness(core_models.TimeStampedModel):
         "위치한 지역(도)", choices=PROVINCE_CHOICES, max_length=20, blank=True, null=True
     )
     city = models.CharField("지역(시)", max_length=80, null=True)
+    price = models.IntegerField("월정액 가격")
 
-    price = models.IntegerField("월가격")
+    # 핼수장 부가정보(회원수/영업시간/보유기구/보유시설/옵션)
     guests = models.IntegerField("회원 수")
     open_time = models.TimeField("오픈시간")
     close_time = models.TimeField("마감시간")
@@ -97,6 +102,12 @@ class Fitness(core_models.TimeStampedModel):
     )
     facilities = models.ManyToManyField("Facility", related_name="fitness", blank=True)
     options = models.ManyToManyField("Option", related_name="fitness", blank=True)
+    
+    #점주 연결 
+    owner = models.ForeignKey(
+        "users.User", related_name="fitness", on_delete=models.SET_NULL, null=True
+    )
+
 
     def __str__(self):
         return self.name

@@ -38,6 +38,7 @@ class fitnessAdmin(admin.ModelAdmin):
                     "name",
                     "description",
                     "province",
+                    "city",
                     "price",
                 )
             },

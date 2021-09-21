@@ -67,7 +67,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
 
-        self.create_auth(user, ROLES.get("ROLE_NORMAL", "NORMAL"))
+        self.create_auth(user, ROLES.get("ROLE_CLIENT", "CLIENT"))
 
         return user
 
