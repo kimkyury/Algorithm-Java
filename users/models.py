@@ -78,8 +78,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-        # 권한 등록 함수
-
+    # 권한 등록 함수
     def create_auth(self, user, role=ROLES.get("ROLE_CLIENT", "CLIENT")):
         role_obj = Auth(user=user, role=role)
         role_obj.save(using=self.db)
@@ -94,7 +93,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=255,
         unique=True,
     )
-    nickname = models.CharField(max_length=20, null=False, unique=True)
+    nickname = models.CharField(
+        verbose_name="이름(성포함)",
+        max_length=20, null=False, unique=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
