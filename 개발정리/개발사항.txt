@@ -28,21 +28,18 @@ https://h0ng3.tistory.com/28 // 다중 유저 못 만드는 구나..
 
 # user를 틀만 만들고 일단 나중에 보완하자.
 https://velog.io/@leokim/2.-User-%EB%AA%A8%EB%8D%B8-%EC%83%9D%EC%84%B11-%EB%AA%A8%EB%8D%B8%ED%8E%B8
-
-
 # 역할기반&인증
 https://velog.io/@jiffydev/Django-7.-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90-6%EC%97%AD%ED%95%A0%EA%B8%B0%EB%B0%98-%ED%97%88%EA%B0%80%EC%9D%B8%EC%A6%9D
-
 #사용자 인증하기
 https://chagokx2.tistory.com/57
-
 # 다중권한주기
 https://blog.thereis.xyz/103
-
 # 유저 어드민 패널에서 조정하기
 https://renine94.tistory.com/27
-
-
 # 유저 관리자 폼 생성& 페이지 수정
 https://renine94.tistory.com/27
 https://dev-yakuza.posstree.com/ko/django/custom-user-model/
+
+
+# 게시판 만들기
+https://eveningdev.tistory.com/15
