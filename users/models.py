@@ -4,8 +4,9 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-from core import models as core_models
 import uuid
+
+from core import models as core_models
 from datetime import datetime
 
 USER_STATUS = {
@@ -53,88 +54,80 @@ PROVINCE_CHOICES = (
 
 
 class UserManager(BaseUserManager):
-
-    use_in_migrations = True
-
     def create_user(self, email, nickname, password=None):
 
         if not email:
-            raise ValueError("이메일은 필수 입니다.")
+            raise ValueError("이메일은 필수입니다. ")
         if not password:
-            raise ValueError("패스워드는 필수 입니다.")
+            raise ValueError("패스워드는 필수입니다. ")
 
         user = self.model(email=self.normalize_email(email), nickname=nickname)
         user.set_password(password)
         user.save(using=self._db)
-
         self.create_auth(user, ROLES.get("ROLE_CLIENT", "CLIENT"))
-
         return user
 
     def create_superuser(self, email, nickname, password):
+        if password is None:
+            raise TypeError("패스워드는 필수입니다. ")
 
-        user = self.create_user(
-            email=self.normalize_email(email), nickname=nickname, password=password
-        )
-        user.is_admin = True
+        user = self.create_user(email, nickname, password)
         user.is_superuser = True
         user.is_staff = True
+        user.is_active = True
         user.save(using=self._db)
         return user
+
+        # 권한 등록 함수
+
+    def create_auth(self, user, role=ROLES.get("ROLE_CLIENT", "CLIENT")):
+        role_obj = Auth(user=user, role=role)
+        role_obj.save(using=self.db)
+        return role_obj
 
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    objects = UserManager()
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
+        verbose_name="이메일",
         max_length=255,
         unique=True,
     )
-    secret = models.UUIDField(default=uuid.uuid4)
-    status = models.CharField(
-        max_length=10, default=USER_STATUS.get("ACTIVE", "ACTIVE")
-    )
-
     nickname = models.CharField(max_length=20, null=False, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
-    USERNAME_FIELD = "nickname"
-    REQUIRED_FIELDS = ["email"]
-
-    """
-    nickname = models.CharField(max_length=20, null=False, unique=True)
-    id = models.BigAutoField(primary_key=True)
-    email = models.EmailField(max_length=320, unique=True)
-    secret = models.UUIDField(default=uuid.uuid4)
-    status = models.CharField(
-        max_length=10, default=USER_STATUS.get("ACTIVE", "ACTIVE")
-    )
 
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    is_superuser = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = [
+        "nickname",
+    ]
 
     objects = UserManager()
-    USERNAME_FIELD = "nickname"
-    REQUIRED_FILEDS = ["email"]
 
-    def get_id(self):
-        return self.id
-    """
+    status = models.CharField(
+        max_length=10, default=USER_STATUS.get("ACTIVE", "ACTIVE")
+    )
 
-    """
+    def __str__(self):
+        return self.email
 
-
-
-
+    class Meta:
+        db_table = "user"
 
 
+# 권한 테이블
+class Auth(models.Model):
+    user = models.ForeignKey(User, related_name="auths", on_delete=models.CASCADE)
+    role = models.CharField(max_length=30, default=ROLES.get("ROLE_CLIENT", "CLIENT"))
+
+
+"""
     # 필드설정 (이미지, 성별, 소개, 연령, 지역)
     phone_number = models.IntegerField("전화번호", blank=True, null=True)
     avatar = models.ImageField("대표이미지", upload_to="대표이미지", blank=True, null=True)

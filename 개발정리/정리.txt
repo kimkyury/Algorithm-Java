@@ -26,8 +26,8 @@
 #관리자 설정
 : python manage.py createsuperuser
     username            // kim
-    email address       // mandarining0918@gmail.com
-    passward            // 12341234
+    email address       // aeae2323@naver.com
+    passward            // boo777
 ================================================
 
 #App 생성 // config폴더 밖에서 다음의 코드 수행
