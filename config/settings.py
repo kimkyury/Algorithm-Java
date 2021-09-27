@@ -46,7 +46,9 @@ THIRD_PARTY_APPS = ["django_countries"]
 PROJECT_APPS = [
     "core.apps.CoreConfig",
     "users.apps.UsersConfig",
-    "fitnesscenters.apps.FitnesscentersConfig" "bootstrap4",
+    "fitnesscenters.apps.FitnesscentersConfig",
+    "communities.apps.CommunitiesConfig",
+    "bootstrap4",
     # "fitnesscenters.apps.FitnesscentersConfig",
 ]
 
