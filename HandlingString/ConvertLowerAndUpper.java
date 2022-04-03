@@ -1,7 +1,7 @@
-
+package HandlingString;
 import java.util.*;
 
- class Main {
+ class ConvertLowerAndUpper {
 
     public String solution(String str) {
         String answer = "";
@@ -19,7 +19,7 @@ import java.util.*;
     }
 
     public static void main(String [] args){
-        Main T = new Main();
+        ConvertLowerAndUpper T = new ConvertLowerAndUpper();
         Scanner kb = new Scanner(System.in);
         String str = kb.next();
 
