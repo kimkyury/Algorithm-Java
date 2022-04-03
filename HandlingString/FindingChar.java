@@ -1,3 +1,4 @@
+package HandlingString;
 import java.util.*;
 
  class Main {
@@ -6,18 +7,14 @@ import java.util.*;
         int answer =0;
         str = str.toUpperCase();
         t = Character.toUpperCase(t);
-
-        // 향상된 for문
-        for(char c : str.toCharArray()){
-            if(str.charAt(i) == t){
-                answer++;
+        for(int i =0; i < str.length(); i++){
+            if (str.charAt(i) == t) {
+                answer ++;
             }
         }
 
         return answer;
     }
-
-
 
     public static void main(String [] args){
         Main T = new Main();
