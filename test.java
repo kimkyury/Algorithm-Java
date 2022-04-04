@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-class WordInSentenceIndex {
+class Main {
     public String solution (String str){
         String answer = "";
         int max = Integer.MIN_VALUE, pos;
@@ -30,7 +30,7 @@ class WordInSentenceIndex {
         return answer; 
     }
     public static void main (String [] args){
-        WordInSentenceIndex T = new WordInSentenceIndex();
+        Main T = new Main();
     
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();

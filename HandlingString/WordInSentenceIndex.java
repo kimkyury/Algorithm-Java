@@ -1,4 +1,4 @@
-
+package HandlingString;
 import java.util.*;
 
 class WordInSentenceIndex {
@@ -14,6 +14,9 @@ class WordInSentenceIndex {
                 answer = tmp;
             }
             str = str.substring(pos+1);
+        }
+        if ( str.length() > max ) {
+            answer = str;
         }
     
         /*

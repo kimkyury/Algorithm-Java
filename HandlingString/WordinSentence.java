@@ -7,13 +7,14 @@ import java.util.*;
         int max = Integer.MIN_VALUE;
         String [] s = str.split(" ");
         
-        int len;
         for(String x : s){
-            len = x.length();
-            if ( max < len)
+            int len = x.length();
+            if ( max < len){
                 max = len;
                 answer = x;
+            }
         }
+
         return answer;
     }
 
