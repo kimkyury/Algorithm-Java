@@ -2,7 +2,7 @@ package HandlingString;
 
 import java.util.*;
 
-class ReverseSpecificWord {
+class ReverseWordDirectly {
     public ArrayList<String> solution (int n, String [] str){
         ArrayList<String> answer = new ArrayList<>();
 
@@ -38,7 +38,7 @@ class ReverseSpecificWord {
         return answer; */
     }
     public static void main (String [] args){
-        ReverseSpecificWord T = new ReverseSpecificWord();
+        ReverseWordDirectly T = new ReverseWordDirectly();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt(); 

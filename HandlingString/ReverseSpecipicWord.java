@@ -1,7 +1,9 @@
+package HandlingString;
+
 
 import java.util.*;
 
-class Main {
+class ReverseSpecificWord {
     public String solution (String str){
 
         String answer;
@@ -14,6 +16,23 @@ class Main {
         char [] cArray = str.toCharArray();
         int lt =0, rt= cArray.length -1;
 
+        
+        while(lt < rt) {
+            if(!Character.isAlphabetic(cArray[lt])) lt++;
+            else if(!Character.isAlphabetic(cArray[rt])) rt++;
+            else{
+                char tmp=cArray[lt];
+                cArray[lt] = cArray[rt];
+                cArray[rt] = tmp;
+                lt++;
+                rt--;
+
+            }
+        }
+
+            
+
+        /* 내가 짠 코드
         while (lt < rt){
             if ( Character.isAlphabetic(cArray[lt])){
                 char tmp = cArray[lt];
@@ -30,14 +49,16 @@ class Main {
             }else{
                 lt++;
             }
-        }
+        } */
+
+
         answer = String.valueOf(cArray);
 
  
         return answer; 
     }
     public static void main (String [] args){
-        Main T = new Main();
+        ReverseSpecificWord T = new ReverseSpecificWord();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.nextLine();
