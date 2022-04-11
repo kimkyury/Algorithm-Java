@@ -9,16 +9,12 @@ class RemoveOperlapChar {
                 answer +=str.charAt(i);
             }
         }
-
         return answer;
-
     }
-
 
     public static void main (String [] args){
         RemoveOperlapChar T = new RemoveOperlapChar();
-        Scanner sc = new Scanner(System.in);
-
+        Scanner sc = new Scanner(System.in);s
         String str = sc.nextLine();
 
         System.out.print(T.solution(str));
