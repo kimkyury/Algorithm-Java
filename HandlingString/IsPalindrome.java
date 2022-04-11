@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class Main {
+class IsPalidrome {
     public String solution (String str){
         //palindrome
         String answer = "YES";
@@ -16,7 +16,7 @@ class Main {
     }
 
     public static void main (String [] args){
-        Main T = new Main();  
+        IsPalidrome T = new IsPalidrome();  
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
