@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class RemoveOperlapChar {
 
     public String solution (String str){
@@ -14,7 +15,7 @@ class RemoveOperlapChar {
 
     public static void main (String [] args){
         RemoveOperlapChar T = new RemoveOperlapChar();
-        Scanner sc = new Scanner(System.in);s
+        Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
         System.out.print(T.solution(str));
