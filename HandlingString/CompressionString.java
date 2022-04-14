@@ -20,6 +20,26 @@ class CompressionString {
 
         return answer;
 
+                /*
+        char tmp = str.charAt(0);
+        int cnt=0;
+
+        for (char c : str.toCharArray()){
+            if(tmp != c ){
+                answer += tmp;
+            if( cnt > 1) answer +=cnt;
+                cnt = 1;
+                tmp = c;
+            }
+            else cnt ++;
+        }
+        answer += tmp;
+
+
+        return answer;
+    }
+ */
+
     }
     public static void main (String [] args){
         CompressionString T = new CompressionString();  
