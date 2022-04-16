@@ -1,13 +1,21 @@
 import java.util.Scanner;
 
 class TallerStudent {
-    public int solution (int N, int [] intArr){
-        int answer = 1;
+    public int solution (int N, int [] arr){
 
         // i는 자신의 앞에 있는 모든 학생보다 커야한다
 
-        Boolean isTaller;
+        int answer =1, max = arr[0];
+        for(int i =1; i<N; i++){
+            if(arr[i] > max){
+                answer++;
+                max = arr[i];
+            }
+        }
 
+
+        /*
+        Boolen isTaller;
         for ( int i =1; i<N; i++){
             isTaller = true;
             for (int j = 0; j<i; j++){
@@ -18,7 +26,7 @@ class TallerStudent {
             }
             if(isTaller == false) continue;
             else answer++;
-        }
+        }*/
 
         return answer;
         
