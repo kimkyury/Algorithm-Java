@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class TwoPoint {
+public class TwoPoints {
 
     public int solution (int [] arr, int k){
 
@@ -30,7 +30,7 @@ class TwoPoint {
 
     public static void main (String [] args) {
 
-        TwoPoint T = new TwoPoint();
+        TwoPoints T = new TwoPoints();
 		Scanner sc = new Scanner(System.in);
 		int n =sc.nextInt();
         int k = sc.nextInt();
