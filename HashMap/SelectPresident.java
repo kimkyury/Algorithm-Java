@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class SelectPresident {
-    
-    public char solution (int n, String str){
-        char answer=' ';
+ public class SelectPresident {
+    public String solution (String str){
+        String answer="";
+        int max = Integer.MIN_VALUE;
 
         HashMap<Character, Integer> map = new HashMap<>();
 
@@ -11,26 +11,23 @@ public class SelectPresident {
             map.put(x, map.getOrDefault(x, 0)+1);
         }
 
-        int max = Integer.MIN_VALUE;
-
         for( char x : map.keySet() ) {
             if(map.get(x) > max){
                 max = map.get(x);
-                answer = x;
+                answer = String.valueOf(x);
             }
         }
-        
         return answer;
     }
 
 
     public static void main (String [] args) {
 
-        Main T = new Main();
+        SelectPresident T = new SelectPresident();
 		Scanner sc = new Scanner(System.in);
 		int n =sc.nextInt();
         String str = sc.next();
-
-		System.out.print(T.solution(n, str));
+        String answer = T.solution(str);
+		System.out.print(answer);
     }
 }
