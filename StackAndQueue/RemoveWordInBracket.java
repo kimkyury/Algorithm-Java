@@ -9,20 +9,16 @@ class RemoveWordInBracket{
         Stack<Character> stack = new Stack<>();
 
         for(int i =0; i<str.length(); i++){
-            stack.push(str.charAt(i));
-
             if(str.charAt(i) == ')'){ 
                 //for(char c : stack) System.out.print(Character.toString(c) + ' ');
                 //System.out.println();
-                while(stack.lastElement() != '(') stack.pop();
-                stack.pop();
-            }
+                //while(stack.lastElement() != '(') stack.pop();
+                while(stack.pop() != '(');
+            }else stack.push(str.charAt(i));
         }
 
         for(char c : stack) answer += c;
-        
         return answer;
-
     }
 
     public static void main(String [] args){
