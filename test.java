@@ -1,48 +1,49 @@
 
-import java.util.*;
 
-class Main {
-    public String solution (String str){
 
-        String answer;
+class Test{
+    public int solution(int n, int k){
+        int answer = 0;
+        // 1. n을 k 진수로 바꿀 것
+        // 2. 소수를 판별할 것 (n을 k진수로 바꾸기)
+        // 3. 정규식으로 해보자
 
-        // 알파벳, 특수문자로 구성 -> 영어 알파벳만 뒤집기, 특수문자는 그대로
-        // a#b!GE*T@S
-        //  (ASKII) 48 <= 특수문자 <= 57,  91 <= 특수문자 <= 96
-        //  (ASKII) 65 <= 영어 소문자 <= 90, 97 <= 영어 대문자 <= 122
+        // 1
+        StringBuilder sb = new StringBuilder();
+        int number = n;
+        while( number > 0){
+            sb.append(number % k);
+            number = number / k;
+        }
+        System.out.println(sb + " " + number);
+        String kNumber = sb.reverse().toString();
 
-        char [] cArray = str.toCharArray();
-        int lt =0, rt= cArray.length -1;
+        // 2
+        String [] numSection = kNumber.split("0");
 
-        while (lt < rt){
-            if ( Character.isAlphabetic(cArray[lt])){
-                char tmp = cArray[lt];
-                
-                if (Character.isAlphabetic(cArray[rt])){
-                    cArray[lt] = cArray[rt];
-                    cArray[rt] = tmp;
-                    rt--;
-                    lt++;
-                }else{
-                    rt--;
+        for(String num : numSection){
+            System.out.print(num + " ");
+            if( num == "1") continue;
+            for ( int i =2; i<num.length(); i++){
+                if(Long.parseLong(num) % i == 0){
+                    break;
                 }
-                
-            }else{
-                lt++;
+                // Prime이라면
+                answer++;
             }
         }
-        answer = String.valueOf(cArray);
 
- 
-        return answer; 
+
+        return answer;
     }
-    public static void main (String [] args){
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
 
-        String str = sc.nextLine();
+    public static void main(String [] args){
+        Test T =  new Test();
+        
+        int n = 437674;
+        int k = 3;
 
-        System.out.print(T.solution(str));
+        System.out.print(T.solution(n, k));
 
     }
 }
