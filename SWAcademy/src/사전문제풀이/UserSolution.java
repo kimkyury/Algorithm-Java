@@ -1,3 +1,5 @@
+package 사전문제풀이;
+
 import java.util.LinkedHashMap;
 
 class UserSolution {
