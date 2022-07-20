@@ -1,15 +1,9 @@
 package day1;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-   사용하는 클래스명이 Solution 이어야 하므로, 가급적 Solution.java 를 사용할 것을 권장합니다.
-   이러한 상황에서도 동일하게 java Solution 명령으로 프로그램을 수행해볼 수 있습니다.
- */
-class NewInsommia {
-
+class Binary {
     public static void main(String args[]) throws Exception {
         /*
          * 아래의 메소드 호출은 앞으로 표준 입력(키보드) 대신 input.txt 파일로부터 읽어오겠다는 의미의 코드입니다.
@@ -31,25 +25,24 @@ class NewInsommia {
          */
 
         for (int test_case = 1; test_case <= T; test_case++) {
-            String caseText = "#" + test_case;
             int N = sc.nextInt();
-            ArrayList<Integer> arr = new ArrayList<>();
+            int M = sc.nextInt();
 
-            int x = 1;
-            while (true) {
-                String xN = String.valueOf(x++ * N);
-
-                for (int i = 0; i < xN.length(); i++) {
-                    int n = Integer.parseInt(String.valueOf(xN.charAt(i)));
-                    if (!arr.contains(n))
-                        arr.add(n);
-                }
-
-                if (arr.size() == 10)
-                    break;
+            String answer = "ON";
+            String binaryM = Integer.toBinaryString(M);
+            while (binaryM.length() <= N) {
+                binaryM = "0" + binaryM;
             }
 
-            System.out.println(caseText + " " + x * N);
+            // System.out.println(binaryM);
+
+            String subString = binaryM.substring(binaryM.length() - (N), binaryM.length());
+
+            if (subString.contains("0")) {
+                answer = "OFF";
+            }
+
+            System.out.println("#" + test_case + " " + answer);
 
         }
     }
