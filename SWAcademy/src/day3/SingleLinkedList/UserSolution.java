@@ -1,4 +1,4 @@
-package day3;
+package day3.SingleLinkedList;
 
 class Node {
     public int data;
