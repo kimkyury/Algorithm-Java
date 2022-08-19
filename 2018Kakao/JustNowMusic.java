@@ -82,7 +82,6 @@ public class JustNowMusic {
 
 
 
-
     public static void main (String [] args) throws IOException{
         JustNowMusic Problem = new JustNowMusic();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

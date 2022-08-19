@@ -24,50 +24,37 @@ public class ValueBracket {
             }else if(c == '['){
                 stack.push(c);
                 tmp *=3;
-            }
+            }else { 
+                if(c == ')'){
+                    // 올바르지 않을 경우 처리
+                    if(stack.isEmpty()) return 0;
+                    else if(!(stack.peek().equals('('))) return 0;
 
-            //닫는 괄호 발견시
-            if(c == ')'){
-                //System.out.println("----total: "  + answer);
-
-                // 올바르지 않을 경우 처리
-                if(stack.isEmpty()) return 0;
-                else if(!(stack.peek().equals('('))) return 0;
-
-                // 점수 계산하기
-                if(str.charAt(i-1) == '(') answer += tmp; // 더하기만 해당 if문에 종속된다
-            
-                tmp /= 2;
-                stack.pop(); // pop은 str원본의 여부와 상관없이, 닫는 괄호 발생시 삭제한다 (여기까지 왔단 것 자체로 정상적인 괄호 상태이므로.)
+                    // 점수 계산하기
+                    if(str.charAt(i-1) == '(') answer += tmp; // 더하기만 해당 if문에 종속된다
                 
+                    tmp /= 2;
+                    stack.pop(); // pop은 str원본의 여부와 상관없이, 닫는 괄호 발생시 삭제한다 (여기까지 왔단 것 자체로 정상적인 괄호 상태이므로.)
+                }else if( c == ']'){
+                    // 올바르지 않을 경우 처리
+                    if( stack.isEmpty())  return 0;
+                    else if(!(stack.peek().equals('['))) return 0;
 
-            }else if( c == ']'){
-
-                // 올바르지 않을 경우 처리
-                if( stack.isEmpty())  return 0;
-                else if(!(stack.peek().equals('['))) return 0;
-
-                // 점수 계산하기
-                if(str.charAt(i-1) == '[') answer += tmp; 
-                tmp /= 3;
-                stack.pop(); // 위와 동일하게 pop은 바로 위의 str의 여부와 상관없이 발생
+                    // 점수 계산하기
+                    if(str.charAt(i-1) == '[') answer += tmp; 
+                    tmp /= 3;
+                    stack.pop(); // 위와 동일하게 pop은 바로 위의 str의 여부와 상관없이 발생
+                }
+                i++;
             }
-
-            i++;
         }
-
         return answer;
     }
 
-    public static void main (String [] args) throws IOException{
-        
+    public static void main (String [] args) throws IOException{  
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ValueBracket problem = new ValueBracket();
-
         String str = br.readLine();
-
-        System.out.println(problem.solve(str));
-
-        //System.out.println(problem.solve(str));
+        System.out.print(problem.solve(str));
     }
 }
