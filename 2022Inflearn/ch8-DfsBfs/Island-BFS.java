@@ -20,6 +20,8 @@ class Main {
     static int[] xs = { 0, 1, 1, 1, 0, -1, -1, -1 };
     static int[] ys = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
+    int[] pizzaCombi;
+
     static int N;
     static int[][] map;
     static int cnt = 0;
