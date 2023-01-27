@@ -1,42 +1,51 @@
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
-public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		
-		Queue<Integer> q = new LinkedList<>();
-		StringBuilder sb = new StringBuilder();
-		int N = sc.nextInt();
-		int K = sc.nextInt();
-		
-		ArrayList<Integer> result = new ArrayList();
-	
-		for (int i = 0; i < N; i++) {
-			q.add(i+1);
-		}
-		
-		int cnt = 1;
-		
-		sb.append("<");
-		
-		while(!q.isEmpty()) {
-			if(q.size() == 1) {
-				sb.append(q.poll()).append(">");
-				break;
-			}
-			if(cnt == K) {
-				sb.append(q.poll()).append(", "); 
-				
-				cnt = 1;
-			} else {
-				q.add(q.poll()); cnt++;
-			}
-		}
-		
-		System.out.println(sb.toString());
-		
-	}
+class Main {
+
+  static BufferedWriter bw = new BufferedWriter(
+    new OutputStreamWriter(System.out)
+  );
+
+  public static int[] solve(int N, int K) {
+    int[] answer = new int[N];
+    Queue<Integer> q = new LinkedList<>();
+    for (int i = 1; i <= N; i++) {
+      q.offer(i);
+    }
+
+    int answerIndex = 0;
+    while (!q.isEmpty()) {
+      for (int i = 0; i < K - 1; i++) {
+        int tmp = q.poll();
+        q.offer(tmp);
+      }
+      answer[answerIndex++] = q.poll();
+    }
+    return answer;
+  }
+
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int N = Integer.parseInt(st.nextToken());
+    int K = Integer.parseInt(st.nextToken());
+
+    int[] answer = solve(N, K);
+    bw.write("<");
+
+    for (int i = 0; i < N - 1; i++) {
+      bw.write(String.valueOf(answer[i]));
+      bw.write(", ");
+    }
+    bw.write(answer[N - 1] + ">");
+
+    bw.flush();
+  }
 }
