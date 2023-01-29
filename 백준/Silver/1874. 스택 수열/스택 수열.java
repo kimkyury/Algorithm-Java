@@ -1,78 +1,62 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
-public class Main {
+class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int[] arr = new int[n];
-		StringBuilder result = new StringBuilder();
-		Stack<Integer> q = new Stack<>();
-		for(int i = 0;i<n;i++) {
-			arr[i] = sc.nextInt();
-		}
-		
-		int idx = 0;
-		int x = 1;
-		q.add(x++);
-		result.append('+').append('\n');
-		boolean flag = true;
-		
-		while (true) {
-			
-			if(x > n) {
-				if(arr[idx] != q.peek()) {
-					flag = false;
-					break;
-				}
-				while(true) {
-					if (q.isEmpty()) {
-						break;
-					}
-					if(arr[idx] != q.peek()) {
-						flag = false;
-						break;
-					}
-					else {
-						q.pop();
-						result.append('-').append('\n');
-						idx++;
-					}
-				}
-			}
-			
-			if (flag == false) {
-				break;
-			}
-			
-			if(q.isEmpty()) {
-				break;
-			}
-			while(true) {
-				if (q.empty()) {
-					break;
-				}
-				if(arr[idx] == q.peek()) {
-					q.pop();
-					result.append('-').append('\n');
-					idx++;
-				}
-				else break;
-			}
-			q.add(x++);
-			result.append('+').append('\n');
-			
-		}
-		
-		if(flag == false) {
-			System.out.println("NO");
-		}
-		else {
-			System.out.print(result);
-		}
-		
-	}
+  static int N;
 
+  static BufferedWriter bw = new BufferedWriter(
+    new OutputStreamWriter(System.out)
+  );
+
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+    // int isPassed[] = new int[N + 1];
+    Stack<Integer> stack = new Stack<>();
+
+    // init case 별도 처리
+    int pushNum = 1;
+    StringBuilder result = new StringBuilder();
+    boolean isImpossible = false;
+
+    int targetNum;
+    for (int i = 0; i < N; i++) {
+      targetNum = Integer.parseInt(br.readLine());
+
+      if (stack.isEmpty()) {
+        stack.push(pushNum++);
+        result.append("+" + "\n");
+      }
+
+      if (stack.peek() == targetNum) {
+        stack.pop();
+        result.append("-" + "\n");
+      } else {
+        while (stack.peek() != targetNum) {
+          if (pushNum > N) {
+            isImpossible = true;
+            break;
+          }
+
+          stack.push(pushNum++);
+          result.append("+" + "\n");
+        }
+        stack.pop();
+        result.append("-" + "\n");
+      }
+    }
+
+    if (isImpossible) bw.write("NO"); else bw.write(result.toString());
+
+    bw.flush();
+  }
 }
