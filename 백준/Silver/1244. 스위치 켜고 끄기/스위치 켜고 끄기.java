@@ -1,84 +1,74 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-class Main {
+public class Main {
 
-  static int N;
-  static int[] sw;
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int s_num = Integer.parseInt(br.readLine());
+		
+		int[] swt = new int[s_num];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for(int i=0;i<s_num;i++) {
+			swt[i]=Integer.parseInt(st.nextToken());
+		}
+		int student_n = Integer.parseInt(br.readLine());
+		
+		for(int i=0;i<student_n;i++) {
+			StringTokenizer st1 = new StringTokenizer(br.readLine());
+			if(Integer.parseInt(st1.nextToken())==1) swt=man(swt,Integer.parseInt(st1.nextToken())); //남학생
+			else swt=woman(swt,Integer.parseInt(st1.nextToken())); //여학생
+			
+		}
+		
+		for (int i=0; i<swt.length;i++) {
+			if(i%20==0 && i!=0) System.out.println();
+			System.out.print(swt[i]+" ");
+			
+		}
+		
+		
+	}
+	
+	static int[] man(int[] swt,int n) { //배수면 토글
+		
+		int i=1;
+		int temp=n;
+		while(n-1<swt.length) {
+			
+			if(swt[n-1]==1) swt[n-1]=0;
+			else swt[n-1]=1;
+			i+=1;
+			n=(temp)*i;
+		}
+		return swt;
+	}
+	
+	static int[] woman(int[] swt,int n) { //양옆이 같으면 토글
+		n-=1;
+		if(swt[n]==1) swt[n]=0;
+		else swt[n]=1;
+		
+		int i=1;
+		while(n-i>=0 && n+i<swt.length) {
+			if(swt[n-i]!=swt[n+i]) break;
+			else {
+				if(swt[n-i]==1) {
+					swt[n-i]=0;
+					swt[n+i]=0;
+				}
+				else {
+					swt[n-i]=1;
+					swt[n+i]=1;
+				}
+			}
+			i+=1;
+		}
+		return swt;
+	}
 
-  public static void onOff(int n) {
-    if (sw[n] == 0) sw[n] = 1; else sw[n] = 0;
-  }
-
-  public static void change(int gender, int n) {
-    if (gender == 1) {
-      int i = 1; //배수역할
-      int pos = n; // 위치
-      while (true) {
-        pos = n * i;
-        if (pos > sw.length - 1) break;
-        onOff(pos);
-        i++;
-      }
-    } else if (gender == 2) {
-      int i = 1; // 배수 역할
-      int pos = n;
-
-      while (true) {
-        if (pos - i < 1 || pos + i > sw.length - 1) break;
-        boolean flag = (sw[pos - i] == sw[pos + i]);
-        if (flag) {
-          onOff(pos - i);
-          onOff(pos + i);
-        } else {
-          break;
-        }
-        i++;
-      }
-      onOff(n);
-    }
-  }
-
-  public static void print() {
-    if (N > 20) {
-      System.out.print(sw[1] + " ");
-      for (int i = 2; i <= N; i++) {
-        System.out.print(sw[i] + " ");
-        if (i % 20 == 0) {
-          System.out.println("");
-        }
-      }
-    } else {
-      for (int i = 1; i <= N; i++) {
-        System.out.print(sw[i] + " ");
-      }
-    }
-  }
-
-  public static void main(String[] args) throws IOException {
-    Main main = new Main();
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    // StringTokenizer st = new StringTokenizer(br.readLine());
-
-    N = Integer.parseInt(br.readLine());
-    sw = new int[N + 1];
-
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    for (int i = 1; i <= N; i++) {
-      sw[i] = Integer.parseInt(st.nextToken());
-    }
-
-    int M = Integer.parseInt(br.readLine());
-    for (int i = 0; i < M; i++) {
-      st = new StringTokenizer(br.readLine());
-      int gender = Integer.parseInt(st.nextToken());
-      int n = Integer.parseInt(st.nextToken());
-
-      change(gender, n);
-    }
-
-    print();
-  }
 }
