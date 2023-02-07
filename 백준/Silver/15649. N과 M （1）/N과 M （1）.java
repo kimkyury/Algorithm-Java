@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -10,6 +12,9 @@ public class Main {
 	static ArrayList<Integer> array = new ArrayList<>();
 	static boolean [] check;
 	static int [] num;
+	
+	static StringBuilder sb;
+	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String value=br.readLine();
@@ -19,6 +24,7 @@ public class Main {
 		
 		N = Integer.parseInt(a[0]);
 		M = Integer.parseInt(a[1]);
+		sb = new StringBuilder();
 		check = new boolean [N];
 		num = new int[N];
 		for(int i=1;i<N+1;i++) {
@@ -26,14 +32,15 @@ public class Main {
 		}
 		
 		perm(0);
+		System.out.println(sb);
 	}
 	
 	static void perm(int idx) {
 		if(idx==M) {
 			for (Integer integer : array) {
-				System.out.print(integer+" ");
+				sb.append(integer).append(" ");
 			}
-			System.out.println();
+			sb.append("\n");
 			return;
 		}
 		
