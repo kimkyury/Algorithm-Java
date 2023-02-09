@@ -1,54 +1,76 @@
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
+class Taste {
+
+	int bitter;
+	int sour;
+
+	Taste(int bitter, int sour) {
+		this.bitter = bitter;
+		this.sour = sour;
+	}
+}
+
 public class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 	static int N;
-	static int[][] a;
-	static int answer= Integer.MAX_VALUE;
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		N = Integer.parseInt(br.readLine());
-		
-		a = new int[N][2];
-		StringTokenizer st; 
-		for(int i=0;i<N;i++) {
-			st = new StringTokenizer(br.readLine());
-			a[i][0]=Integer.parseInt(st.nextToken());
-			a[i][1]=Integer.parseInt(st.nextToken());
-		}
-		
-		find(0,0);
-		System.out.println(answer);
-		
-	}
-	
-	static void find(int idx,int mask) {
-		if(idx==N) {
-			if (mask==0) return;
-			int c=1; //신맛
-			int s=0; //쓴맛
-			
-			for(int i=0;i<N;i++) {
-				if((mask&1<<i)>0) {
-					c*=a[i][0];
-					s+=a[i][1];
-				}
-			}
-			
-			answer=Math.min(answer, Math.abs(c-s));
+	static int minDiff;
+	static Taste[] tastes;
+
+	public static void solve(int sideIdx, int idx, int totalBitter, int totalSour) {
+
+		if (sideIdx == N) {
+			if (idx == 0)
+				return;
+//			System.out.println(sideIdx + " " + idx + " " + totalBitter + " " + totalSour);
+//			System.out.println("어?");
+			minDiff = Math.min(minDiff, Math.abs(totalBitter - totalSour));
 			return;
 		}
-		
-		
-		find(idx+1,mask|1<<idx);
-		
-		find(idx+1,mask);
+
+		Taste tmpT = tastes[sideIdx];
+		solve(sideIdx + 1, idx + 1, totalBitter * tmpT.bitter, totalSour + tmpT.sour);
+		solve(sideIdx + 1, idx, totalBitter, totalSour);
+
 	}
 
+	public static void main(String[] args) throws IOException {
+
+		// 음식의 신 맛 = 신맛의 곱
+		// 음식의 쓴맛 = 신맛의 합
+		// abs[신맛의 곱 - 신맛의 합] 가장 작은 요리 찾기
+
+		N = Integer.parseInt(br.readLine());
+		tastes = new Taste[N];
+		minDiff = Integer.MAX_VALUE;
+
+		for (int i = 0; i < N; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int sourCnt = Integer.parseInt(st.nextToken());
+			int bitterCnt = Integer.parseInt(st.nextToken());
+			tastes[i] = new Taste(sourCnt, bitterCnt);
+		}
+
+		if (N == 1) {
+			minDiff = Math.abs(tastes[0].sour - tastes[0].bitter);
+			bw.write(String.valueOf(minDiff));
+			bw.flush();
+			return;
+		}
+
+		// 조합을 구해야한다
+		solve(0, 0, 1, 0);
+
+		bw.write(String.valueOf(minDiff));
+
+		//
+		bw.flush();
+	}
 }
