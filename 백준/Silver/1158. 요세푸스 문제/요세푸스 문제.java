@@ -4,48 +4,47 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 import java.util.StringTokenizer;
 
-class Main {
+public class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-  static BufferedWriter bw = new BufferedWriter(
-    new OutputStreamWriter(System.out)
-  );
+	public static void main(String[] args) throws IOException {
 
-  public static int[] solve(int N, int K) {
-    int[] answer = new int[N];
-    Queue<Integer> q = new LinkedList<>();
-    for (int i = 1; i <= N; i++) {
-      q.offer(i);
-    }
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		List<Integer> arr = new LinkedList<>();
+		List<Integer> answer = new LinkedList<>();
 
-    int answerIndex = 0;
-    while (!q.isEmpty()) {
-      for (int i = 0; i < K - 1; i++) {
-        int tmp = q.poll();
-        q.offer(tmp);
-      }
-      answer[answerIndex++] = q.poll();
-    }
-    return answer;
-  }
+		for (int i = 1; i <= N; i++) {
+			arr.add(i);
+		}
 
-  public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    int N = Integer.parseInt(st.nextToken());
-    int K = Integer.parseInt(st.nextToken());
+		int curIndex = M - 1;
+		while (!(arr.size() == 0)) {
+			if (curIndex < arr.size()) {
+				answer.add(arr.get(curIndex));
+				arr.remove(curIndex);
+			} else {
+				curIndex = curIndex % arr.size();
+				answer.add(arr.get(curIndex));
+				arr.remove(curIndex);
+			}
+			curIndex += M - 1;
+		}
 
-    int[] answer = solve(N, K);
-    bw.write("<");
+		bw.write("<");
 
-    for (int i = 0; i < N - 1; i++) {
-      bw.write(String.valueOf(answer[i]));
-      bw.write(", ");
-    }
-    bw.write(answer[N - 1] + ">");
+		for (int i = 0; i < answer.size() - 1; i++) {
+			bw.write(String.valueOf(answer.get(i) + ", "));
+		}
 
-    bw.flush();
-  }
+		bw.write(String.valueOf(answer.get(answer.size() - 1)));
+		bw.write(">");
+
+		bw.flush();
+	}
 }
