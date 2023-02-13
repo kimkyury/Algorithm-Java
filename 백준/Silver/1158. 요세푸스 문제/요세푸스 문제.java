@@ -1,50 +1,46 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
-
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		StringTokenizer st = new StringTokenizer(br.readLine());
+		
 		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		List<Integer> arr = new LinkedList<>();
-		List<Integer> answer = new LinkedList<>();
-
-		for (int i = 1; i <= N; i++) {
-			arr.add(i);
+		int K = Integer.parseInt(st.nextToken());
+		Queue<Integer> queue= new LinkedList<>();
+		
+		int[] input = new int[N+1];
+		for(int i=1;i<=N;i++) {
+			queue.offer(i);
 		}
-
-		int curIndex = M - 1;
-		while (!(arr.size() == 0)) {
-			if (curIndex < arr.size()) {
-				answer.add(arr.get(curIndex));
-				arr.remove(curIndex);
-			} else {
-				curIndex = curIndex % arr.size();
-				answer.add(arr.get(curIndex));
-				arr.remove(curIndex);
+		
+		sb.append("<");		
+		//죽으면 0으로 표시해서 산, 죽음 구분
+		int alive=1;
+		while (!queue.isEmpty()) {
+			int num = queue.poll();
+			if(alive % K ==0) {
+				sb.append(num + ", ");
+			}else {
+				queue.offer(num);
 			}
-			curIndex += M - 1;
+			alive++;
 		}
-
-		bw.write("<");
-
-		for (int i = 0; i < answer.size() - 1; i++) {
-			bw.write(String.valueOf(answer.get(i) + ", "));
-		}
-
-		bw.write(String.valueOf(answer.get(answer.size() - 1)));
-		bw.write(">");
-
-		bw.flush();
+		
+	sb.setLength(sb.length()-2);
+	sb.append(">");
+	System.out.println(sb);
+	
 	}
 }
