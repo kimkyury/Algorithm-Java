@@ -52,8 +52,8 @@ class Main {
     boolean flag = true;
     for (int candi : candidate) {
       flag = true;
-      for (int num : arr) {
-        if (num % candi != 0) {
+      for (int i = 1; i < arr.length; i++) {
+        if (arr[i] % candi != 0) {
           flag = false;
           break;
         }
