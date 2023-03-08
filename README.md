@@ -1,3 +1,1 @@
-#Solving Algorithm - JAVA
-
-인프런 김태원 코딩테스트 대비를 참고합니다.
+BaekJoon, SWAcademy 등의 알고리즘 풀이에 대한 기록 레포지토리입니다.
