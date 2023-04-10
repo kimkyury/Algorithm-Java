@@ -1,60 +1,64 @@
-
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-	static int N;
-	static int M;
-	static ArrayList<Integer> array = new ArrayList<>();
-	static boolean [] check;
-	static int [] num;
-	
+	static int[] input;
+	static int[] answer;
+	static int cnt;
+	static boolean isPassed[];
+	static int N, M;
+
 	static StringBuilder sb;
-	
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String value=br.readLine();
+
+	public static void recur(int index, int cnt) throws IOException{
 		
-		String[] a;
-		a=value.split(" ");
-		
-		N = Integer.parseInt(a[0]);
-		M = Integer.parseInt(a[1]);
-		sb = new StringBuilder();
-		check = new boolean [N];
-		num = new int[N];
-		for(int i=1;i<N+1;i++) {
-			num[i-1]=i;
-		}
-		
-		perm(0);
-		System.out.println(sb);
-	}
-	
-	static void perm(int idx) {
-		if(idx==M) {
-			for (Integer integer : array) {
-				sb.append(integer).append(" ");
+		if (cnt == M) {
+			for(int i =1; i<=M; i++) {
+				bw.write(String.valueOf(answer[i]) + " ");
 			}
-			sb.append("\n");
+			bw.write("\n");
 			return;
 		}
 		
-		for(int i=0;i<N;i++) {
-			if(check[i]) continue;
+		for(int i =1; i<=N; i++) {
+			if ( isPassed[i]) continue;
 			
-			check[i]=true;
-			array.add(num[i]);
-			perm(idx+1);
-			array.remove(array.size()-1);
-			check[i]=false;
+			isPassed[i] = true;
+			answer[index] = input[i];
+			recur(index+1, cnt+1);
+			isPassed[i] = false;
 		}
 		
-		
+
+
 	}
 
+	public static void main(String[] args) throws IOException {
+
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		input = new int[N + 1];
+		for (int i = 1; i <= N; i++) {
+			input[i] = i;
+		}
+//		sb = new StringBuilder();
+		answer = new int[M+1];
+		isPassed = new boolean[N + 1];
+
+		recur(1, 0);
+		
+
+
+		bw.flush();
+
+	}
 }
