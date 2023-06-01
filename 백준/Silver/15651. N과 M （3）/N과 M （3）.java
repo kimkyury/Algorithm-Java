@@ -26,6 +26,7 @@ public class Main {
       for (int i : selected) {
         sb.append(i).append(" ");
       }
+      sb.deleteCharAt(sb.length() - 1);
       sb.append("\n");
       return;
     }
