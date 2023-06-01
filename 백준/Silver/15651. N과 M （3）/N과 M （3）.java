@@ -24,7 +24,7 @@ public class Main {
   static void perm(int cnt, int[] selected) {
     if (cnt == M) {
       for (int i : selected) {
-        sb.append(i + " ");
+        sb.append(i).append(" ");
       }
       sb.append("\n");
       return;
