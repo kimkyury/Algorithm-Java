@@ -1,60 +1,136 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Deque;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
+class MyDeque {
+
+  List<Integer> list;
+
+  // 삽입 삭제가 빨라야함
+
+  MyDeque() {
+    list = new LinkedList<Integer>();
+  }
+
+  void pushFront(int x) {
+    if (list.size() == 0) {
+      list.add(x);
+      return;
+    }
+    list.add(0, x);
+  }
+
+  void pushBack(int x) {
+    list.add(x);
+  }
+
+  int popFront() {
+    if (list.size() == 0) return -1;
+    int removeItem = list.remove(0);
+    return removeItem;
+  }
+
+  int popBack() {
+    if (list.size() == 0) return -1;
+    int removeItem = list.remove(list.size() - 1);
+    return removeItem;
+  }
+
+  int size() {
+    return list.size();
+  }
+
+  int empty() {
+    if (list.size() == 0) return 1; else return 0;
+  }
+
+  int front() {
+    if (list.size() == 0) return -1;
+    return list.get(0);
+  }
+
+  int back() {
+    if (list.size() == 0) return -1;
+    return list.get(list.size() - 1);
+  }
+}
 
 public class Main {
 
-	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
-		Scanner sc = new Scanner(System.in);
-		Deque q = new LinkedList<>();
-		
-		for(int tc= 0; tc < n; tc++) {
-			String s = br.readLine();
-			StringTokenizer st = new StringTokenizer(s);
-			String x = st.nextToken();
-			int a = 0;
-			
-			if(x.equals("push_back")) {
-				a = Integer.parseInt(st.nextToken());
-				q.addLast(a);
-			}
-			if(x.equals("push_front")) {
-				a = Integer.parseInt(st.nextToken());
-				q.addFirst(a);
-			}
-			if(x.equals("front")) {
-				if(q.isEmpty()) System.out.println(-1);
-				else System.out.println(q.peekFirst());
-			}
-			if(x.equals("back")) {
-				if(q.isEmpty()) System.out.println(-1);
-				else System.out.println(q.peekLast());
-			}
-			if(x.equals("size")) {
-				System.out.println(q.size());
-			}
-			if(x.equals("pop_front")) {
-				if(q.isEmpty()) System.out.println(-1);
-				else System.out.println(q.poll());
-			}
-			if(x.equals("pop_back")) {
-				if(q.isEmpty()) System.out.println(-1);
-				else System.out.println(q.pollLast());
-			}
-			if(x.equals("empty")) {
-				if(q.isEmpty()) System.out.println(1);
-				else System.out.println(0);
-			}
-			
-		}
-	}
+  static BufferedReader br = new BufferedReader(
+    new InputStreamReader(System.in)
+  );
+  static BufferedWriter bw = new BufferedWriter(
+    new OutputStreamWriter(System.out)
+  );
+  // static StringBuilder sb = new StringBuilder();
+  static StringTokenizer st;
+  static int N;
 
+  public static void main(String[] args) throws IOException {
+    int N = Integer.parseInt(br.readLine());
+
+    MyDeque mq = new MyDeque();
+
+    boolean flag;
+    int result = -10;
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine());
+      flag = true;
+      String command = st.nextToken();
+
+      if (command.equals("push_front")) {
+        int pushItem = Integer.parseInt(st.nextToken());
+        flag = false;
+        mq.pushFront(pushItem);
+      } else if (command.equals("push_back")) {
+        int pushItem = Integer.parseInt(st.nextToken());
+        flag = false;
+        mq.pushBack(pushItem);
+      } else if (command.equals("pop_front")) {
+        result = mq.popFront();
+      } else if (command.equals("pop_back")) {
+        result = mq.popBack();
+      } else if (command.equals("size")) {
+        result = mq.size();
+      } else if (command.equals("empty")) {
+        result = mq.empty();
+      } else if (command.equals("front")) {
+        result = mq.front();
+      } else if (command.equals("back")) {
+        result = mq.back();
+      }
+
+      if (flag) {
+        bw.write(result + "\n");
+        // bw.flush();
+      }
+    }
+
+    bw.flush();
+  }
+
+  static void print(boolean[][] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      System.out.println(Arrays.toString(arr[i]));
+    }
+  }
+
+  static void print(int[][] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      System.out.println(Arrays.toString(arr[i]));
+    }
+  }
+
+  static void print(int[] arr) {
+    System.out.println(Arrays.toString(arr));
+  }
 }
