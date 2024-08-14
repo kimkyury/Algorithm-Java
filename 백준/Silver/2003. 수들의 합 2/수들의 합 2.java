@@ -18,34 +18,30 @@ class Main {
         st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         long M = Integer.parseInt(st.nextToken());
-        int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        int caseCnt = 0;
+        int[] arr = new int[N];
+        st = new StringTokenizer(br.readLine());
+
+        long sum = 0;
+        int lt = 0, caseCnt = 0;
         for (int i = 0; i < N; i++) {
-            int sIdx = i;
-            caseCnt += countSumCasesM(arr, sIdx, M);
+
+            sum += arr[i] = Integer.parseInt(st.nextToken());
+
+            if (sum == M) {
+                caseCnt++;
+            }
+
+            while (sum > M) {
+                sum -= arr[lt++];
+                if (sum == M) {
+                    caseCnt++;
+                }
+            }
         }
+
         bw.write(String.valueOf(caseCnt));
         bw.flush();
-    }
-
-    public static int countSumCasesM(int[] arr, int sIdx, long M) {
-
-        int cnt = 0;
-        long subSub = 0;
-        for (int i = sIdx; i < arr.length; i++) {
-
-            if (subSub > M) {
-                return cnt;
-            }
-
-            subSub += arr[i];
-            if (subSub == M) {
-                cnt++;
-            }
-        }
-
-        return cnt;
     }
 
     public static void show(boolean[][] arr) {
