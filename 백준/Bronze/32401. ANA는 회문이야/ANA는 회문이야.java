@@ -14,37 +14,32 @@ class Main {
         // 3 <=, start&End = A, N은 1개
 
         int N = Integer.parseInt(br.readLine());
+        int cntANA = 0;
 
         String str = br.readLine();
-        int cnt = 0;
-        for (int i = 0; i <= N - 3; i++) {
-            for (int j = i + 3; j <= N; j++) {
-                String subStr = str.substring(i, j);
-                if (confirm(subStr)) {
-                    cnt++;
-                }
+
+        // 1. 시작점 찾기
+        int lt = 0;
+        for (; lt < N; lt++) {
+            if (str.charAt(lt) == 'A') {
+                break;
             }
         }
 
-        bw.write(cnt + "");
+        int cntN = 0;
+        for (int i = lt; i < N; i++) {
+            if (str.charAt(i) == 'N') { // 2. N이 하나 일 것
+                cntN++;
+            } else if (str.charAt(i) == 'A') { // 3. 시작점으로 교체
+                if (cntN == 1) {
+                    cntANA++;
+                }
+                cntN = 0;
+            }
+        }
+
+        bw.write(cntANA + "");
         bw.flush();
-    }
-
-    public static boolean confirm(String str) {
-
-        if (!str.startsWith("A") || !str.endsWith("A")) {
-            return false;
-        }
-
-        if (str.length() - str.replaceAll("A", "").length() != 2) {
-            return false;
-        }
-
-        if (!(str.length() - str.replaceAll("N", "").length() == 1)) {
-            return false;
-        }
-
-        return true;
     }
 
     public static void show(boolean[][] arr) {
