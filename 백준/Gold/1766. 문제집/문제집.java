@@ -13,7 +13,6 @@ public class Main {
     static int[] rootCnt;
     static int[] order;
     static List<List<Integer>> children;
-    static boolean[] passed;
 
     public static void main(String[] args) throws IOException {
 
@@ -29,7 +28,6 @@ public class Main {
 
         order = new int[N + 1];
         rootCnt = new int[N + 1];
-        passed = new boolean[N + 1];
 
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
@@ -49,7 +47,7 @@ public class Main {
         bw.flush();
     }
 
-    public static int BFS() {
+    public static void BFS() {
 
         PriorityQueue<Integer> q = new PriorityQueue<>(
                 (o1, o2) -> {
@@ -71,32 +69,16 @@ public class Main {
             int v = q.poll();
 
             if (rootCnt[v] == 0) {
-
                 order[idx++] = v;
             }
 
             for (int child : children.get(v)) {
-
                 rootCnt[child]--;
-
-                if (rootCnt[child] == 0 && !passed[child]) {
+                if (rootCnt[child] == 0) {
                     q.offer(child);
                 }
             }
 
         }
-
-        return 0;
     }
-
-    public static void print(int map[][]) {
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[0].length; j++) {
-                System.out.print(map[i][j] + " ");
-            }
-            System.out.println("");
-        }
-
-    }
-
 }
