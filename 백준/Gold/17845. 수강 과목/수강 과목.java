@@ -32,10 +32,28 @@ public class Main {
             subj[i][1] = Integer.parseInt(st.nextToken());
         }
 
-        solve(subj);
+        // solve2(subj);
 
-        bw.write(dp[K][N] + "");
+        // bw.write(dp[K][N] + "");
+        bw.write(solve2(subj) + "");
         bw.flush();
+    }
+
+    public static int solve2(int[][] subj) {
+
+        int[] dp = new int[N + 1];
+
+        // 과목을 모두 탐색
+        for (int i = 0; i < K; i++) {
+            for (int j = N; j >= subj[i][1]; j--) {
+
+                // 한 과목에 대해서 돌아보고
+                // 다음 과목에 대해서 돌아보고
+                dp[j] = Math.max(dp[j], dp[j - subj[i][1]] + subj[i][0]);
+            }
+        }
+
+        return dp[N];
     }
 
     public static void solve(int[][] subj) {
