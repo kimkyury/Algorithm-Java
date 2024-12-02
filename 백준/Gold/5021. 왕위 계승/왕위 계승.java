@@ -12,7 +12,6 @@ public class Main {
 
     static HashMap<String, Integer> cntByName;
     static HashMap<String, List<String>> tree;
-    static HashMap<String, Boolean> passedByName;
     static HashMap<String, Double> valueByName;
 
     public static void main(String[] args) throws IOException {
@@ -22,11 +21,9 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
 
         // 혈통에서 가장 먼 놈, root
-
         // 자식들 정보를 집어넣기
         cntByName = new HashMap<>();
         tree = new HashMap<>();
-        passedByName = new HashMap<>();
         valueByName = new HashMap<>();
 
         String root = br.readLine();
@@ -38,8 +35,6 @@ public class Main {
             String p2 = st.nextToken();
 
             // 해당 인간이 혈통을 가졌는지 여부는 순서대로 알 수 없다
-
-            passedByName.put(next, false);
 
             List<String> p1Children = tree.getOrDefault(p1, new ArrayList<>());
             List<String> p2Children = tree.getOrDefault(p2, new ArrayList<>());
@@ -57,10 +52,6 @@ public class Main {
         // 1. 자식정보 트리구조 저장
         // 2. 부모가 없는 것부터 탐색 -> 혈동이 아닌애 거르고, root인 유토피아 거르고
         // 3. root인 사람으로부터 1/2씩 계산?
-
-        for (String key : tree.keySet()) {
-            List<String> child = tree.get(key);
-        }
 
         Queue<String> q = new ArrayDeque<>();
         q.offer(root);
@@ -82,9 +73,7 @@ public class Main {
 
         String maxName = "";
         double max = 0.0;
-        // Set<String> candidate = new HashSet<>();
         for (int i = 0; i < M; i++) {
-            // candidate.add(br.readLine());
 
             String candidate = br.readLine();
 
