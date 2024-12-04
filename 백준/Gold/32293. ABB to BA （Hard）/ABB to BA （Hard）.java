@@ -21,7 +21,6 @@ public class Main {
         T = Integer.parseInt(br.readLine());
 
         for (int t = 0; t < T; t++) {
-            // Stack 문제
 
             int len = Integer.parseInt(br.readLine());
             String line = br.readLine();
@@ -31,57 +30,44 @@ public class Main {
                 continue;
             }
 
-            Stack<Character> stack = new Stack<>();
+            // Stack<Character> stack = new Stack<>();
+            StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < len; i++) {
 
-                stack.add(line.charAt(i));
+                // stack.add(line.charAt(i));
+                sb.append(line.charAt(i));
 
                 boolean hasABB = false;
                 int cnt = 0;
                 while (true) {
 
-                    if (stack.size() < 3) {
+                    if (sb.length() < 3) {
                         break;
                     }
 
-                    char c3 = stack.pop();
-                    if (c3 != 'B') {
-                        stack.add(c3);
+                    if (sb.charAt(sb.length() - 3) == 'A' &&
+                            sb.charAt(sb.length() - 2) == 'B' &&
+                            sb.charAt(sb.length() - 1) == 'B') {
+
+                        sb.setLength(sb.length() - 3);
+                        sb.append('B');
+                        cnt++;
+                    } else {
                         break;
                     }
-
-                    char c2 = stack.pop();
-                    if (c2 != 'B') {
-                        stack.add(c2);
-                        stack.add(c3);
-                        break;
-                    }
-
-                    char c1 = stack.pop();
-                    if (c1 != 'A') {
-                        stack.add(c1);
-                        stack.add(c2);
-                        stack.add(c3);
-                        break;
-                    }
-
-                    cnt++;
-                    stack.add('B');
                 }
 
                 for (int j = 0; j < cnt; j++) {
-                    stack.add('A');
+                    sb.append('A');
                 }
-            }
-
-            StringBuilder sb = new StringBuilder();
-            while (stack.size() != 0) {
-                sb.insert(0, stack.pop());
             }
 
             bw.write(sb.toString() + "\n");
         }
+
+        // st = new StringTokenizer(br.readLine());
+
         bw.flush();
 
     }
