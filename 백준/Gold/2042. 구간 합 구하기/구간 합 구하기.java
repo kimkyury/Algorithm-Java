@@ -85,7 +85,7 @@ public class Main {
         }
 
         int mid = lt + (rt - lt) / 2;
-        if (lt <= tIdx && tIdx <= mid) {
+        if (tIdx <= mid) {
             // 변경시킬 arr의 idx(tIdx)의 수색 범위 좁히기
             change(2 * idx, lt, mid, tIdx, v);
         } else {
