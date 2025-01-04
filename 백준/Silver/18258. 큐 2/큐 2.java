@@ -1,59 +1,92 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+
+import java.util.*;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
-		Queue<Integer> queue = new LinkedList<>();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		
-		int N = Integer.parseInt(br.readLine());
-		int back = 0;
-		
-		for (int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			String s = st.nextToken();
-			
-			if(s.equals("push")) {
-				int x = Integer.parseInt(st.nextToken());
-				queue.add( x );
-				back = x;
-			}
-			
-			else if(s.equals("pop")) {
-				if (queue.isEmpty()) {
-					sb.append(-1).append("\n");
-				} else sb.append(queue.poll()).append("\n");
-			}
-			
-			else if(s.equals("size")) {
-				sb.append(queue.size()).append("\n");
-			}
-			
-			else if(s.equals("empty")) {
-				if(queue.isEmpty()) {
-					sb.append(1).append("\n");
-				} else sb.append(0).append("\n");
-			}
-			
-			else if(s.equals("front")) {
-				if(queue.isEmpty()) {
-					sb.append(-1).append("\n");
-				} else sb.append(queue.peek()).append("\n");
-			}
-			
-			else if(s.equals("back")) {
-				if(queue.isEmpty()) {
-					sb.append(-1).append("\n");
-				} else sb.append(back).append("\n");
-			}
-		}
-		System.out.println(sb);
-	}
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+    static int N, M, T;
+    static StringTokenizer st;
+
+    static boolean[] isLeft;
+
+    static List<Integer> arr;
+
+    public static void main(String[] args) throws IOException {
+
+        N = Integer.parseInt(br.readLine());
+        arr = new LinkedList<>();
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+
+            String command = st.nextToken();
+
+            switch (command) {
+
+                case "push":
+                    int num = Integer.parseInt(st.nextToken());
+                    push(num);
+                    break;
+                case "pop":
+                    bw.write(pop() + "\n");
+                    break;
+                case "size":
+                    bw.write(size() + "\n");
+                    break;
+                case "empty":
+                    bw.write(empty() + "\n");
+
+                    break;
+                case "front":
+                    bw.write(front() + "\n");
+                    break;
+                case "back":
+                    bw.write(back() + "\n");
+
+                    break;
+
+            }
+        }
+
+        bw.flush();
+    }
+
+    static void push(int a) {
+        arr.add(a);
+    }
+
+    static int pop() {
+        if (empty() == 1) {
+            return -1;
+        }
+
+        return arr.remove(0);
+    }
+
+    static int size() {
+        return arr.size();
+    }
+
+    static int empty() {
+        if (arr.size() == 0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    static int front() {
+        if (empty() == 0) {
+            return arr.get(0);
+        }
+        return -1;
+    }
+
+    static int back() {
+        if (empty() == 0) {
+            return arr.get(arr.size() - 1);
+        }
+        return -1;
+    }
 }
