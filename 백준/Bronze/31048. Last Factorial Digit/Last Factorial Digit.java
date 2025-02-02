@@ -24,12 +24,27 @@ public class Main {
             int num = Integer.parseInt(br.readLine());
 
             int result = 1;
+            // 1~4와 그 이상은 정해져 있다
 
-            for (int j = 2; j <= num; j++) {
-                result *= j;
+            switch (num) {
+                case 1:
+                    bw.write("1\n");
+                    break;
+                case 2:
+                    bw.write("2\n");
+                    break;
+                case 3:
+                    bw.write("6\n");
+                    break;
+                case 4:
+                    bw.write("4\n");
+                    break;
+
+                default:
+                    bw.write("0\n");
+
             }
 
-            bw.write((result % 10) + "\n");
         }
         bw.flush();
     }
